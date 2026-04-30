@@ -1,15 +1,16 @@
 import asyncio
+import os
+from remotefuncs import encrypt, sha, baseify, attr
 import websockets
+attr.password= "Usman"
+attr.get_key()
 async def serveron():
     async def handle_connection(websocket):
         print("A client connected!")
         try:
             # This loop keeps the connection open to listen for multiple messages
             async for message in websocket:
-                message = message.strip().strip("|")
-                
-                # Optional: Send a response back to the client
-                await websocket.send(f"Echo: {message}")
+                await websocket.send(str(encrypt(message)))
                 
         except websockets.exceptions.ConnectionClosedOK:
             print("Client disconnected gracefully.")
