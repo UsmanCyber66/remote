@@ -11,7 +11,7 @@ async def serveron():
             # This loop keeps the connection open to listen for multiple messages
             async for message in websocket:
                 x= message.strip().strip("|")
-                await websocket.send(str(encrypt(message)))
+                
                 
         except websockets.exceptions.ConnectionClosedOK:
             print("Client disconnected gracefully.")
