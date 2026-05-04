@@ -1,5 +1,6 @@
 
 from getpass import getpass
+import json
 
 import typer
 import remotefuncs
@@ -12,10 +13,15 @@ app.add_typer(add, name="add")
 
 @add.command()
 def user():
-    username = sha(inpute("Username for new user: "))
+    username = inpute("Username for new user: ")
     password = getepass()
-    
-    print("User added successfully.") 
+    combohash = baseify(sha(username + password))
+    print("User added successfully.")
+    data= {
+        "combohash": combohash
+    }
+    with open(baseify(sha(username)), "w") as f:
+        json.dump(data, f)
 
 if __name__ == "__main__":
     app()

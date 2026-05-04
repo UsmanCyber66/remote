@@ -31,3 +31,17 @@ def get(x):
             return f.read()
     except FileNotFoundError as e:
         return "File not found."
+def inpute(prompt):
+    while True:
+        value = input(prompt).strip()
+        if value:  # This checks if the string is NOT empty
+            return value
+        print("Input cannot be empty. Please try again.")
+        
+def getepass(prompt="Enter Password: "):
+    while True:
+        # getpass hides the typing in the terminal
+        pw = getpass.getpass(prompt)
+        if pw.strip():  # Ensures it's not empty or just spaces
+            return pw
+        print("Password cannot be empty!")
