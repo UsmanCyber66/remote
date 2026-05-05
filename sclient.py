@@ -1,11 +1,9 @@
 from getpass import getpass
-import json
+import json, typer, os
 
-import typer
-import remotefuncs
 from remotefuncs import sha, baseify, attr, encrypt, get, byte, inpute, getepass
-app = typer.Typer()
 
+app = typer.Typer()
 add = typer.Typer()
 
 remove = typer.Typer()
@@ -24,8 +22,12 @@ def add_user():
     data= {
         "combohash": combohash
     }
-    with open(baseify(sha(username)), "w") as f:
-        json.dump(data, f, indent=4)
+    file=baseify(sha(username))
+    if os.path.exists(file):
+        print("User already exists. Please choose a different username.")
+    else:
+        with open(baseify(sha(username)), "w") as f:
+            json.dump(data, f, indent=4)
 @remove.command("user")
 def remove_user():
     
