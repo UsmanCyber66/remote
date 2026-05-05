@@ -8,10 +8,9 @@ num=0
 async def serveron():
     async def handle_connection(websocket):
         try:
-            rec=0 
             async for message in websocket:
-                rec=+1
-                if rec==1:
+                num= num+ 1
+                if num==1:
                     serverlogin(message)
                 else:
                     print(os.listdir()) #just for testing. 
