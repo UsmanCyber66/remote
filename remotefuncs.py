@@ -13,6 +13,7 @@ class attr:
     password: str| bytes= "default"
     username:  str | bytes = "default"
     messages = {"ls":"os.listdir()", "pwd":"os.getcwd()", "cat":"open(args).read()"}
+    logged=False
     @classmethod
     def get_key(cls):
         # This calculates the key "on the fly" using the CURRENT password
@@ -54,6 +55,7 @@ def serverlogin(message):
             data = json.load(f)
         if data["combohash"] == baseify(sha( x[0]+ x[1])).decode(): 
             print("User authenticated successfully.")
+            attr.logged = True
         else:
             print("Authentication failed: combohash error")
     else:

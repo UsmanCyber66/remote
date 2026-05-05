@@ -3,14 +3,12 @@ import os
 from remotefuncs import encrypt, sha, baseify, attr, serverlogin
 import websockets
 from websockets.exceptions import ConnectionClosed
-global num
-num=0
 async def serveron():
     async def handle_connection(websocket):
         try:
             async for message in websocket:
                 num=+ 1
-                if num==1:
+                if attr.logged == False:
                     serverlogin(message)
                 else:
                     print(os.listdir()) #just for testing. 
