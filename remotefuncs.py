@@ -47,7 +47,7 @@ def getepass(prompt="Enter Password: "):
         print("Password cannot be empty!")
         
 def serverlogin(message):
-    x= message.strip().strip("|")
+    x= message.strip().replace("|", " ").split()
     u = baseify(sha(x[0])).decode()
     if os.path.exists(u) == True:
         with open(u, "r") as f:
