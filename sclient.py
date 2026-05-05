@@ -1,4 +1,3 @@
-
 from getpass import getpass
 import json
 
@@ -6,11 +5,16 @@ import typer
 import remotefuncs
 from remotefuncs import sha, baseify, attr, encrypt, get, byte, inpute, getepass
 app = typer.Typer()
+
 add = typer.Typer()
+
 remove = typer.Typer()
+
 app.add_typer(remove, name="remove")
+
 app.add_typer(add, name="add")
-add.add_typer(add, name="remove")
+
+
 @add.command("user")
 def add_user():
     username = inpute("Username for new user: ")
