@@ -28,18 +28,29 @@ def add_user():
         json.dump(data, f, indent=4)
 @remove.command("user")
 def remove_user():
+    
     username = inpute("Username to remove: ")
+    
     password = getepass()
+    
     combohash = baseify(sha(username + password)).decode()
+    
     try:
+    
         with open(baseify(sha(username)), "r") as f:
+    
             data = json.load(f)
+    
             if data.get("combohash") == combohash:
-                import os
-                os.remove(baseify(sha(username)))
-                print("User removed successfully.")
+                    delete=True
             else:
-                print("Incorrect username or password.")
+                delete=False
+        if delete==True:
+            import os
+            os.remove(baseify(sha(username)))
+            print("User removed successfully.")
+        else:
+            print("Incorrect password. User not removed.")
     except FileNotFoundError:
         print("User not found.")
 if __name__ == "__main__":
