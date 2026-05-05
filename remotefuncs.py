@@ -55,7 +55,7 @@ def serverlogin(message):
         if data["combohash"] == baseify(sha(u + x[1])).decode(): 
             print("User authenticated successfully.")
         else:
-            print("Authentication failed. Incorrect username or password.")
+            print("Authentication failed: combohash error")
     else:
-        print("Authentication failed: Incorrect username or password.")
+        print("Authentication failed: user not found")
         
