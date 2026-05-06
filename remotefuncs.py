@@ -111,9 +111,3 @@ def update(username, action="add"):
                 # Keep everything else exactly the same
                 f.write(line_content)
 
-# Usage Examples:
-# modify_users_list("Usman", action="add")
-# modify_users_list("Usman", action="remove")
-
-# Test it
-# update_persistent_list("Usman")
