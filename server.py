@@ -11,7 +11,7 @@ try:
                 async for message in websocket:
                     print(message)
                     if attr.logged == False:
-                        serverlogin(message)
+                        await serverlogin(message)
                     else:
                         print(os.listdir()) #just for testing. 
             except ConnectionClosed:
