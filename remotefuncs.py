@@ -80,23 +80,24 @@ def update_persistent_list(new_username):
         lines = f.readlines()
 
     with open(file_path, "w") as f:
-        for line in lines:
+        for i in lines:
+            if i== 16:#i want it to be line 16
             # Look for the specific line defining the user list
-            if "user =" in line:
-                # This logic assumes 'user' is a list. 
-                # We append the new name to the existing representation.
-                current_list_str = line.split("=")[1].strip()
-                try:
-                    current_list = ast.literal_eval(current_list_str)
-                except:
-                    current_list = []
+                if "user =" in i:
+                    # This logic assumes 'user' is a list. 
+                    # We append the new name to the existing representation.
+                    current_list_str = i.split("=")[1].strip()
+                    try:
+                        current_list = ast.literal_eval(current_list_str)
+                    except:
+                        current_list = []
                 
-                if new_username not in current_list:
-                    current_list.append(new_username)
+                    if new_username not in current_list:
+                        current_list.append(new_username)
                 
                 # Rewrite the line with the updated list
-                f.write(f"    user = {current_list}\n")
-            else:
-                f.write(line)
+                    f.write(f"    user = {current_list}\n")
+                else:
+                    f.write(i)
                 
                 
