@@ -3,4 +3,6 @@ test*
 Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=
 .vscode
 __pycache__
-*.pyc
+*.pyc.vscode/
+__pycache__/
+*.py[cod]
