@@ -48,13 +48,16 @@ def getepass(prompt="Enter Password: "):
         print("Password cannot be empty!")
         
 def serverlogin(message):
-    async def login(message):
-        nonce=str(random.randint(100000, 999999))  # Generate a random nonce
-        await websockets.send(nonce)
-        cr = await websockets.recv()
-        cr= cr.strip().replace("|", "").split()
-        if baseify(sha(cr[0])).decode() in os.listdir():
-            await websockets.send("ok")
-            attr.logged=True
-        else:
-            return websockets.send("Auth Failed")
+    try:    
+        async def login(message):
+            nonce=str(random.randint(100000, 999999))  # Generate a random nonce
+            await websockets.send(nonce)
+            cr = await websockets.recv()
+            cr= cr.strip().replace("|", "").split()
+            if baseify(sha(cr[0])).decode() in os.listdir():
+                await websockets.send("ok")
+                attr.logged=True
+            else:
+                return websockets.send("Auth Failed")
+    except Exception as e:
+        print(f"Login error: {e}")
