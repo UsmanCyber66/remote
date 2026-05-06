@@ -50,11 +50,11 @@ def getepass(prompt="Enter Password: "):
 def serverlogin(message):
     async def login(message):
         nonce=str(random.randint(100000, 999999))  # Generate a random nonce
-        await websocket.send(nonce)
-        cr = await websocket.recv()
+        await websockets.send(nonce)
+        cr = await websockets.recv()
         cr= cr.strip().replace("|", "").split()
         if baseify(sha(cr[0])).decode() in os.listdir():
-            await websocket.send("ok")
+            await websockets.send("ok")
             attr.logged=True
         else:
-            return websocket.send("Auth Failed")
+            return websockets.send("Auth Failed")
