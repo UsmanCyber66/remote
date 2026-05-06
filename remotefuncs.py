@@ -73,10 +73,11 @@ async def serverlogin(websocket, message): # Accept the connection object
     
 import ast
 
-def update(new_username):
+import ast
+
+def update(username, action="add"):
     file_path = "remotefuncs.py"
     
-    # 1. Read everything into memory first
     try:
         with open(file_path, "r") as f:
             lines = f.readlines()
@@ -84,32 +85,35 @@ def update(new_username):
         print("Error: remotefuncs.py not found.")
         return
 
-    # 2. Re-write the file line by line
     with open(file_path, "w") as f:
-        # enumerate starts at 1 to match your line 16 count
         for line_num, line_content in enumerate(lines, 1):
-            
-            # Target the specific line where 'users = []' lives
             if line_num == 16 and "users =" in line_content:
+                # Extract and parse the list
                 parts = line_content.split("=")
                 current_list_str = parts[1].strip()
                 
                 try:
-                    # Safely convert the string "['user1']" back to a Python list
                     current_list = ast.literal_eval(current_list_str)
                 except Exception:
                     current_list = []
                 
-                # Append the new user for your UC66 Remote tool
-                if new_username not in current_list:
-                    current_list.append(new_username)
+                # Logic for Add vs Remove
+                if action == "add":
+                    if username not in current_list:
+                        current_list.append(username)
+                elif action == "remove":
+                    if username in current_list:
+                        current_list.remove(username)
                 
-                # Write the updated line with proper indentation
+                # Write back the modified line
                 f.write(f"    users = {current_list}\n")
-                
             else:
-                # THIS IS THE KEY: If it's not line 16, write it back UNCHANGED
+                # Keep everything else exactly the same
                 f.write(line_content)
+
+# Usage Examples:
+# modify_users_list("Usman", action="add")
+# modify_users_list("Usman", action="remove")
 
 # Test it
 # update_persistent_list("Usman")
