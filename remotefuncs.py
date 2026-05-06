@@ -80,7 +80,7 @@ import ast
 
 import ast
 def noncify(username, nonce):
-    return remotocrypt(username + str(nonce))
+    return remotocrypt(username + nonce.encode())
 def update(username, action="add"):
     file_path = "remotefuncs.py"
     
