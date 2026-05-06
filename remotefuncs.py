@@ -13,6 +13,7 @@ class attr:
     username:  str | bytes = "default"
     messages = {"ls":"os.listdir()", "pwd":"os.getcwd()", "cat":"open(args).read()"}
     logged=False
+    users = []
     @classmethod
     def get_key(cls):
         # This calculates the key "on the fly" using the CURRENT password
