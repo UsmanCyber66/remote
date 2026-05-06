@@ -58,6 +58,7 @@ def serverlogin(message):
                 await websockets.send("ok")
                 print("ok")
                 attr.logged=True
+                return "Auth Successful"
             else:
                 return websockets.send("Auth Failed")
         asyncio.run(login(message))
