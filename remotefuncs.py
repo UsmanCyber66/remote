@@ -64,7 +64,7 @@ async def serverlogin(websocket, message): # Accept the connection object
         cr = await websocket.recv()
         
         # Basic cleanup of the received string
-        if cr ==baseify(sha('Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=' + str(nonce))).decode().encode("utf-8"):
+        if cr in attr.users and cr.encode("utf-8"):
             await websocket.send("Login successful!")
             print("Client authenticated successfully.")
     except Exception as e:
@@ -74,7 +74,8 @@ async def serverlogin(websocket, message): # Accept the connection object
 import ast
 
 import ast
-
+def noncify(username, nonce):
+    return remotocrypt(username + str(nonce))
 def update(username, action="add"):
     file_path = "remotefuncs.py"
     
@@ -100,14 +101,16 @@ def update(username, action="add"):
                 # Logic for Add vs Remove
                 if action == "add":
                     if username not in current_list:
-                        current_list.append(username)
+                        current_list.append(remotocrypt(username))
                 elif action == "remove":
                     if username in current_list:
-                        current_list.remove(username)
-                
+                        current_list.remove(remotocrypt(username))
+
                 # Write back the modified line
                 f.write(f"    users = {current_list}\n")
             else:
                 # Keep everything else exactly the same
                 f.write(line_content)
 
+def remotocrypt(x):
+    return baseify(sha(x)).decode()
