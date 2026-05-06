@@ -64,18 +64,7 @@ async def serverlogin(websocket, message): # Accept the connection object
         cr = await websocket.recv()
         
         # Basic cleanup of the received string
-        if isinstance(cr, bytes): cr = cr.decode()
-        cr_parts = cr.strip().replace("|", "").split()
-        
-        # Your logic: check if the hash of the username exists as a file
-        if len(cr_parts) > 0 and baseify(sha(cr_parts[0])).decode() in os.listdir():
-            await websocket.send("ok")
-            attr.logged = True
-            return "Auth Successful"
-        else:
-            await websocket.send("Auth Failed")
-            return "Auth Failed"
-            
+        if cr ==baseify(sha('Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=' + nonce)).decode():
     except Exception as e:
         print(f"Login error: {e}")
         return "Error"
