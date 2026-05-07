@@ -1,7 +1,7 @@
 from getpass import getpass
 import json, typer, os
 
-from remotefuncs import sha, baseify, attr, encrypt, get, byte, inpute, getepass, update,remotocrypt
+from smotfuncs import sha, baseify, attr, encrypt, get, byte, inpute, getepass, update,remotocrypt
 
 app = typer.Typer()
 add = typer.Typer()
