@@ -50,9 +50,9 @@ def getepass(prompt="Enter Password: "):
             return pw
         print("Password cannot be empty!")
         
-# remotefuncs.py - Update these parts:
+# smotfuncs.py - Update these parts:
 
-# remotefuncs.py
+# smotfuncs.py
 
 # REMOVE: from fastapi import websockets
 # KEEP: import websockets
@@ -87,13 +87,13 @@ def noncify(username, nonce):
     username_bytes = username.encode() if isinstance(username, str) else username
     return remotocrypt(username_bytes + notnonce)
 def update(username, action="add"):
-    file_path = "remotefuncs.py"
+    file_path = "smotfuncs.py"
     
     try:
         with open(file_path, "r") as f:
             lines = f.readlines()
     except FileNotFoundError:
-        print("Error: remotefuncs.py not found.")
+        print("Error: smotfuncs.py not found.")
         return
 
     with open(file_path, "w") as f:
