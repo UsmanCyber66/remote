@@ -124,3 +124,7 @@ def update(username, action="add"):
 
 def remotocrypt(x):
     return baseify(sha(x)).decode('utf-8')
+async def forever(websocket, message):
+    if message in attr.messages:
+        u = f'return {attr.messages[message]}'
+        websocket.send(exec(u))
