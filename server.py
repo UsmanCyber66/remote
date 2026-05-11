@@ -3,7 +3,7 @@ import os
 import websockets
 from websockets.exceptions import ConnectionClosed
 # Importing your custom utilities from remotefuncs
-from smotfuncs import encrypt, sha, baseify, attr, serverlogin
+from smotfuncs import encrypt, sha, baseify, attr, serverlogin, forever
 
 async def handle_connection(websocket):
     print("Client connected.")
@@ -18,10 +18,9 @@ async def handle_connection(websocket):
                 result = await serverlogin(websocket, message)
                 print(f"Auth Result: {result}")
             else:
+                forever(websocket, message)
                 # Once authenticated, provide functional results
-                print(f"Auth active. Current Directory: {os.listdir()}")
-                # You can add logic here to send the listdir back to the client
-                await websocket.send(str(os.listdir()))
+                
                 
     except ConnectionClosed:
         print("Client disconnected gracefully.")
