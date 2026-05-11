@@ -12,6 +12,5 @@ async def main():
         response = await websocket.recv()
         await websocket.send("ls") 
         print(response)
-        print(await websocket.recv())
         
 asyncio.run(main())
