@@ -18,7 +18,7 @@ async def handle_connection(websocket):
                 result = await serverlogin(websocket, message)
                 print(f"Auth Result: {result}")
             else:
-                forever(websocket, message)
+                await forever(websocket, message)
                 # Once authenticated, provide functional results
                 
                 
