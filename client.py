@@ -12,5 +12,10 @@ async def main():
         response = await websocket.recv()
         await websocket.send("ls") 
         print(response)
+        try:
+            while True:
+                print(websocket.recv())
+        except KeyboardInterrupt:
+            return None
         
 asyncio.run(main())
