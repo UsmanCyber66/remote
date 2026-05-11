@@ -11,7 +11,7 @@ async def handle_connection(websocket):
             if attr.logged==False:
                 await serverlogin(websocket,message)
             else:
-                await forever(websocket,message)
+                print(os.listdir())
     except ConnectionClosed:
         print("Client disconnected gracefully.")
         attr.logged = False
